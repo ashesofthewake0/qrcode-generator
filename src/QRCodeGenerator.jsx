@@ -24,29 +24,35 @@ export default function QRCodeGenerator() {
           {error && (
             <h2 className="text-red-700 font-bold mb-2">{error}</h2>
           )}
+          <div className="grid place-items-center">
+            {
+            qrCodeUrl ? 
+            <div>
+              <h1 className="text-white font-semibold mb-2">Your QR Code</h1>
+              <img src={qrCodeUrl} alt="QRCode" className="mt-2 "/>
+            </div> : 
+            <div className="bg-white size-72 rounded-2xl">
+               
+            </div>
+          }
+          </div>
           
-          {qrCodeUrl && (
-            <>
-              <h2 className="text-white font-semibold mb-2">Your QR Code</h2>
-              <img src={qrCodeUrl} alt="QRCode" className="mt-2" />
-            </>
-          )}
         </div>
         <input 
           type="text" 
-          className="border-solid rounded-md border-blue-500 focus:border-blue-800" 
+          className="border-solid rounded-md p-1 my-2 border-blue-500 focus:border-blue-800" 
           placeholder="Enter a URL" 
           value={inputText} 
           onChange={(e) => setInputText(e.target.value)} 
         />
         <input 
           type="number" 
-          className="border-solid rounded-md p-1 mx-2 border-slate-500 focus:border-slate-800" 
+          className="border-solid rounded-md p-1 mx-2 my-2 border-slate-500 focus:border-slate-800" 
           value={size} 
           onChange={(e) => setSize(e.target.value)} 
         />
         <button 
-          className="mt-4 mx-4 bg-blue-300 hover:bg-blue-500 transition duration-500 ease-in-out hover:scale-90 text-white font-bold py-2 px-4 rounded-md" 
+          className="mt-4 mx-4 bg-blue-300 hover:bg-blue-500 w-full transition duration-500 ease-in-out hover:scale-90 text-white font-bold py-2 px-4 rounded-md" 
           onClick={generateQRCode}
         >
           GENERATE
