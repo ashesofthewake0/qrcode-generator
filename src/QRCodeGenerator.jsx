@@ -18,45 +18,48 @@ export default function QRCodeGenerator() {
   };
 
   return (
-    <div className="px-6 py-12 flex flex-col items-center justify-center">
-      <div className="rounded-xl border border-gray-500 m-4 p-4">
-        <div className="bg-blue-600 rounded-xl p-4">
-          {error && (
-            <h2 className="text-red-700 font-bold mb-2">{error}</h2>
-          )}
-          <div className="grid place-items-center">
-            {
-            qrCodeUrl ? 
-            <div>
-              <h1 className="text-white font-semibold mb-2">Your QR Code</h1>
-              <img src={qrCodeUrl} alt="QRCode" className="mt-2 "/>
-            </div> : 
-            <div className="bg-white size-72 rounded-2xl">
-               
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-600 p-4">
+      <div className="bg-white max-w-md w-full rounded-xl shadow-lg p-6 space-y-4">
+        <h1 className="text-2xl font-bold text-center text-blue-700">QR Code Generator</h1>
+        {error && (
+          <div className="text-red-600 font-medium text-center mb-2">{error}</div>
+        )}
+        <div className="flex flex-col items-center space-y-4">
+          {qrCodeUrl ? (
+            <div className="text-center">
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">Your QR Code</h2>
+              <a href={qrCodeUrl} target="_blank" rel="noopener noreferrer">
+                <img src={qrCodeUrl} alt="Generated QR Code" className="w-full max-w-xs border rounded-lg shadow-md
+                transition duration-300 ease-in-out transform hover:scale-95"
+                />
+              </a>
             </div>
-          }
-          </div>
-          
+          ) : (
+            <div className="w-full h-52 bg-gray-200 rounded-lg flex items-center justify-center">
+              <p className="text-gray-400">QR Code Preview</p>
+            </div>
+          )}
+          <input 
+            type="text" 
+            className="w-full p-3 border rounded-lg border-gray-300 focus:border-blue-500 focus:outline-none" 
+            placeholder="Enter a URL" 
+            value={inputText} 
+            onChange={(e) => setInputText(e.target.value)} 
+          />
+          <input 
+            type="number" 
+            className="w-full p-3 border rounded-lg border-gray-300 focus:border-blue-500 focus:outline-none" 
+            placeholder="Size (e.g., 200)" 
+            value={size} 
+            onChange={(e) => setSize(e.target.value)} 
+          />
+          <button 
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-95" 
+            onClick={generateQRCode}
+          >
+            Generate
+          </button>
         </div>
-        <input 
-          type="text" 
-          className="border-solid rounded-md p-1 my-2 border-blue-500 focus:border-blue-800" 
-          placeholder="Enter a URL" 
-          value={inputText} 
-          onChange={(e) => setInputText(e.target.value)} 
-        />
-        <input 
-          type="number" 
-          className="border-solid rounded-md p-1 mx-2 my-2 border-slate-500 focus:border-slate-800" 
-          value={size} 
-          onChange={(e) => setSize(e.target.value)} 
-        />
-        <button 
-          className="mt-4 mx-4 bg-blue-300 hover:bg-blue-500 w-full transition duration-500 ease-in-out hover:scale-90 text-white font-bold py-2 px-4 rounded-md" 
-          onClick={generateQRCode}
-        >
-          GENERATE
-        </button>
       </div>
     </div>
   );
